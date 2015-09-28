@@ -70,11 +70,11 @@ public class Product {
 	public int hashCode() {
 		
 		return new HashCodeBuilder(17, 31).
-	            append(productName).
-	            append(manufacturer).
-	            append(model).
-	            append(family).
-	            append(announcedDate).toHashCode();
+	            append(Matcher.normalize(productName)).
+	            append(Matcher.normalize(manufacturer)).
+	            append(Matcher.normalize(model)).
+	            append(Matcher.normalize(family)).
+	            append(Matcher.normalize(announcedDate)).toHashCode();
 	}
 	
 	@Override

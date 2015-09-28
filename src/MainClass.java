@@ -5,6 +5,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -14,7 +17,7 @@ import org.json.simple.parser.ParseException;
 
 public class MainClass {
 
-	private static final String RESULTS_FILE = "../results.txt";
+	private static final String RESULTS_FILE = "../resultsTest.txt";
 	private static final String PRODUCTS_FILE = "../products.txt";
 	private static final String LISTINGS_FILE = "../listings.txt";
 
@@ -37,13 +40,13 @@ public class MainClass {
 	public static void main(String[] args) {
 		ArrayList<Product> products = readProducts();
 		ArrayList<Listing> listings = readListings();
-
-		System.out.println("product size is " + products.size());
-		System.out.println("listings size is " + listings.size());
-		HashMap<String, ArrayList<Listing>> results = Matcher.getResults2(
+		
+		Matcher matcher = new Matcher();
+		
+		HashMap<Product, List<Listing>> results = matcher.macheListings(
 				products, listings);
 
-		writeResultsToFile2(results);
+		writeResultsToFile(results);
 	}
 
 	/**
@@ -119,20 +122,20 @@ public class MainClass {
 	 * @param results
 	 *            the list of result that must be written to the file
 	 */
-	private static void writeResultsToFile(ArrayList<Result> results) {
-
-		System.out.println("to file");
+	private static void writeResultsToFile(
+			HashMap<Product, List<Listing>> results) {
 
 		try {
 			PrintWriter out = new PrintWriter(RESULTS_FILE);
 
-			for (Result result : results) {
-
+			for (Map.Entry<Product, List<Listing>> entry : results.entrySet()) {
 				JSONObject object = new JSONObject();
 
 				JSONArray listings = new JSONArray();
 
-				for (Listing listing : result.getListings()) {
+				List<Listing> listingsList = entry.getValue();
+
+				for (Listing listing : entry.getValue()) {
 					JSONObject listingJson = new JSONObject();
 
 					listingJson.put(TITLE_KEY, listing.getTitle());
@@ -145,53 +148,7 @@ public class MainClass {
 				}
 
 				object.put(LISTING_KEY, listings);
-				object.put(PRODUCT_NAME_KEY, result.getProductName());
-
-				String jsonString = JSONValue.toJSONString(object);
-
-				out.println(jsonString);
-			}
-
-			out.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * This method gets an ArrayList of Result java objects, convert each of
-	 * them to a json object and writes it to results.txt file.
-	 * 
-	 * @param results
-	 *            the list of result that must be written to the file
-	 */
-	private static void writeResultsToFile2(HashMap<String, ArrayList<Listing>> results) {
-
-		System.out.println("to file");
-
-		try {
-			PrintWriter out = new PrintWriter(RESULTS_FILE);
-
-			for (Result result : results) {
-
-				JSONObject object = new JSONObject();
-
-				JSONArray listings = new JSONArray();
-
-				for (Listing listing : result.getListings()) {
-					JSONObject listingJson = new JSONObject();
-
-					listingJson.put(TITLE_KEY, listing.getTitle());
-					listingJson.put(PRICE_KEY, listing.getPrice());
-					listingJson.put(CURRENCY_KEY, listing.getCurrency());
-					listingJson
-							.put(MANUFACTURER_KEY, listing.getManufacturer());
-
-					listings.add(listingJson);
-				}
-
-				object.put(LISTING_KEY, listings);
-				object.put(PRODUCT_NAME_KEY, result.getProductName());
+				object.put(PRODUCT_NAME_KEY, entry.getKey().getProductName());
 
 				String jsonString = JSONValue.toJSONString(object);
 
