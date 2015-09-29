@@ -66,7 +66,7 @@ public final class Matcher {
 			return results;
 	}
 	
-	private float matchScore(String[] listingTitleWords, Set<String> productWords) {
+	public float matchScore(String[] listingTitleWords, Set<String> productWords) {
 		float relatedWords = 0;
 		float totalWords = listingTitleWords.length;
 
@@ -77,7 +77,7 @@ public final class Matcher {
 		return relatedWords / totalWords;
 	}
 	
-	private String[] splitIntoNormalizedWords(String input) {
+	public String[] splitIntoNormalizedWords(String input) {
 		return normalize(input).split(" ");
 	}
 

@@ -5,6 +5,7 @@
               directory with the processing instruction <?eclipse.ant.import?>
               as the first entry and export the buildfile again. --><project basedir="." default="build" name="Challenge2">
     <property environment="env"/>
+    <property name="junit.output.dir" value="junit"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.8"/>
     <property name="source" value="1.8"/>
@@ -54,9 +55,42 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
-    <target name="run">
+    <target name="Challenge2">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="MainClassTest" todir="${junit.output.dir}"/>
+            <test name="MatcherTest" todir="${junit.output.dir}"/>
+            <classpath refid="Challenge2.classpath"/>
+        </junit>
+    </target>
+    <target name="MainClass (5)">
         <java classname="MainClass" failonerror="true" fork="yes">
             <classpath refid="Challenge2.classpath"/>
         </java>
+    </target>
+    <target name="MainClassTest (1)">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="MainClassTest" todir="${junit.output.dir}"/>
+            <classpath refid="Challenge2.classpath"/>
+        </junit>
+    </target>
+    <target name="MatcherTest (1)">
+        <mkdir dir="${junit.output.dir}"/>
+        <junit fork="yes" printsummary="withOutAndErr">
+            <formatter type="xml"/>
+            <test name="MatcherTest" todir="${junit.output.dir}"/>
+            <classpath refid="Challenge2.classpath"/>
+        </junit>
+    </target>
+    <target name="junitreport">
+        <junitreport todir="${junit.output.dir}">
+            <fileset dir="${junit.output.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${junit.output.dir}"/>
+        </junitreport>
     </target>
 </project>

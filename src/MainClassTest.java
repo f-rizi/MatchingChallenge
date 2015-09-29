@@ -35,31 +35,31 @@ public class MainClassTest {
 		String productJsonString;
 		
 		
-		product = new Product("Pentax-WG-1", "Pentax",
-				"Optio", "WG-1", "2010-09-19T20:00:00.000-04:00");
-		
-		productJsonString = "{\"product_name\":\"Pentax-WG-1\",\"manufacturer\":\"Pentax\",\"model\":\"WG-1\",\"family\":\"Optio\",\"announced-date\":\"2010-09-19T20:00:00.000-04:00\"}";
-		
-		assertEquals(product,
-				MainClass.parseProductJsonString(productJsonString));
-		
-		
-		product = new Product("Pentax-WG-2", "Pentax",
-				"Optio", "WG-1", "2010-09-19T20:00:00.000-04:00");
-		
-		productJsonString = "{\"product_name\":\"Pentax-WG-1\",\"manufacturer\":\"Pentax\",\"model\":\"WG-1\",\"family\":\"Optio\",\"announced-date\":\"2010-09-19T20:00:00.000-04:00\"}";
-		
-		assertNotEquals(product,
-				MainClass.parseProductJsonString(productJsonString));
-		
-		
-		product = new Product("Pentax-WG-1", "Pentax",
-				"", "WG-1", "2010-09-19T20:00:00.000-04:00");
-		
-		productJsonString = "{\"product_name\":\"Pentax-WG-1\",\"manufacturer\":\"Pentax\",\"model\":\"WG-1\",\"announced-date\":\"2010-09-19T20:00:00.000-04:00\"}";
-		
-		assertEquals(product,
-				MainClass.parseProductJsonString(productJsonString));
+ 		product = new Product("Pentax-WG-1", "Pentax",
+ 				"Optio", "WG-1", "2010-09-19T20:00:00.000-04:00");
+ 		
+ 		productJsonString = "{\"product_name\":\"Pentax-WG-1\",\"manufacturer\":\"Pentax\",\"model\":\"WG-1\",\"family\":\"Optio\",\"announced-date\":\"2010-09-19T20:00:00.000-04:00\"}";
+ 		
+ 		assertEquals(product,
+ 				MainClass.parseProductJsonString(productJsonString));
+ 		
+ 		
+ 		product = new Product("Pentax-WG-2", "Pentax",
+ 				"Optio", "WG-1", "2010-09-19T20:00:00.000-04:00");
+ 		
+ 		productJsonString = "{\"product_name\":\"Pentax-WG-1\",\"manufacturer\":\"Pentax\",\"model\":\"WG-1\",\"family\":\"Optio\",\"announced-date\":\"2010-09-19T20:00:00.000-04:00\"}";
+ 		
+ 		assertNotEquals(product,
+ 				MainClass.parseProductJsonString(productJsonString));
+ 		
+ 		
+ 		product = new Product("Pentax-WG-1", "Pentax",
+ 				"", "WG-1", "2010-09-19T20:00:00.000-04:00");
+ 		
+ 		productJsonString = "{\"product_name\":\"Pentax-WG-1\",\"manufacturer\":\"Pentax\",\"model\":\"WG-1\",\"announced-date\":\"2010-09-19T20:00:00.000-04:00\"}";
+ 		
+ 		assertEquals(product,
+ 				MainClass.parseProductJsonString(productJsonString));
 	}
 
 }

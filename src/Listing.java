@@ -42,6 +42,7 @@ public class Listing {
 	
 	@Override
 	public int hashCode() {
+//		return 0;
 		return new HashCodeBuilder(17, 31).
 	            append(Matcher.normalize(title)).
 	            append(Matcher.normalize(manufacturer)).
@@ -51,7 +52,9 @@ public class Listing {
 	
 	@Override
 	public boolean equals(Object object) {
-		if (object instanceof Listing) {
+//		return true;
+		
+		if (!(object instanceof Listing)) {
 			return false;
 		}
 		
