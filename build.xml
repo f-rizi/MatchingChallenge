@@ -55,7 +55,7 @@
         <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
         <antcall target="build"/>
     </target>
-    <target name="Challenge2">
+    <target name="tests">
         <mkdir dir="${junit.output.dir}"/>
         <junit fork="yes" printsummary="withOutAndErr">
             <formatter type="xml"/>
@@ -64,12 +64,12 @@
             <classpath refid="Challenge2.classpath"/>
         </junit>
     </target>
-    <target name="MainClass (5)">
+    <target name="run">
         <java classname="MainClass" failonerror="true" fork="yes">
             <classpath refid="Challenge2.classpath"/>
         </java>
     </target>
-    <target name="MainClassTest (1)">
+    <target name="MainClassTest">
         <mkdir dir="${junit.output.dir}"/>
         <junit fork="yes" printsummary="withOutAndErr">
             <formatter type="xml"/>
@@ -77,7 +77,7 @@
             <classpath refid="Challenge2.classpath"/>
         </junit>
     </target>
-    <target name="MatcherTest (1)">
+    <target name="MatcherTest">
         <mkdir dir="${junit.output.dir}"/>
         <junit fork="yes" printsummary="withOutAndErr">
             <formatter type="xml"/>
