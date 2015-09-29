@@ -1,8 +1,8 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author fatemeh
@@ -10,26 +10,40 @@ import java.util.List;
  */
 public final class Matcher {
 	
-	private static final float SCORE_THRESHOLD = 0.60f;
-	private static final float BALANCER = 1;
-
+	private static final float SCORE_THRESHOLD = 0.7f;
 	
-	public HashMap<Product, List<Listing>> macheListings(
+	public HashMap<Product, List<Listing>> matchListings(
 			List<Product> products, List<Listing> listings) {
 
 			HashMap<Product, List<Listing>> results = new HashMap<Product, List<Listing>>();
-
+			
+			/* Pre-split products into words to reduce amount of work done in the main algorithm */
+			Set<String>[] productNormalizedWords = new HashSet[products.size()];
+			for (int i = 0; i < products.size(); i++) {
+				Product product = products.get(i);
+				String productWords[] = splitIntoNormalizedWords(
+					     product.getProductName() + " " +
+					     product.getManufacturer() + " " +
+					     product.getModel() + " " +
+					     product.getFamily());
+				
+				productNormalizedWords[i] = new HashSet<String>();
+				for(String word : productWords)
+					productNormalizedWords[i].add(word);
+			}
+			
 			for (Listing listing : listings) {
 				Product bestProduct = null;
 				double bestScore = 0.0;
 
+				String[] listingTitleWords = splitIntoNormalizedWords(listing.getTitle());
+
 				/* find the product matching the listing */
-				for (Product product : products) {
-					double matchScore = MatchScore(listing, product);
-					
+				for (int i = 0; i < products.size(); i++) {
+					double matchScore = matchScore(listingTitleWords, productNormalizedWords[i]);
 					if (matchScore >= SCORE_THRESHOLD && matchScore > bestScore) {
 						bestScore = matchScore;
-						bestProduct = product;
+						bestProduct = products.get(i);
 					}
 				}
 
@@ -46,80 +60,33 @@ public final class Matcher {
 				}
 
 				matchedListings.add(listing);
-
 				results.put(bestProduct, matchedListings);
-				
-				//hadi injaa ro nemifaham chera intori neveshte boodi:
-//				if (!results.containsKey(bestProduct))
-//					reulsts.put();
 			}
 			
 			return results;
 	}
 	
-	private float MatchScore(Listing listing, Product product) {
+	private float matchScore(String[] listingTitleWords, Set<String> productWords) {
 		float relatedWords = 0;
-		float totalWords = 0;
-		
-		String[] titleWords = titleWords(listing);
-		ArrayList<String> productWords = productInfoWords(product);
-		
-		
-		totalWords = titleWords.length;
-		
-		for (String titleWord : titleWords) {
-			if (productWords.contains(titleWord)) {
+		float totalWords = listingTitleWords.length;
+
+		for (String listingTitleWord: listingTitleWords)
+			if (productWords.contains(listingTitleWord))
 				relatedWords++;
-			}
-		}
-				
+
 		return relatedWords / totalWords;
 	}
 	
-	
-	private String[] titleWords(Listing listing) {
-		String normalizedTitle = normalize(listing.getTitle());
-		String[] titleWords = normalizedTitle.split(" ");
-		
-		return titleWords;
-	}
-	
-	private ArrayList<String> productInfoWords(Product product) {
-		StringBuilder builder = new StringBuilder();
-		builder.append(product.getProductName()); 
-		builder.append(" ");
-		builder.append(product.getManufacturer());
-		builder.append(" ");
-		builder.append(product.getModel());
-		builder.append(" ");
-		builder.append(product.getFamily());
-		
-		String productInfo = builder.toString();
-		productInfo = normalize(productInfo);
-		
-		String[] words = productInfo.split(" ");
-		
-		
-		ArrayList<String> uniqueWords = new ArrayList<String>();
-		
-		for (String word : words) {
-			if (!uniqueWords.contains(word)) {
-				uniqueWords.add(word);
-			}
-		}
-		
-		return uniqueWords;
+	private String[] splitIntoNormalizedWords(String input) {
+		return normalize(input).split(" ");
 	}
 
 	public static String normalize(String input) {
-		String normalized = "";
-
-		normalized = input.replaceAll("[/,_-]", " ");
-
-		normalized = normalized.replaceAll("[^a-zA-Z0-9\\ ]", "");
-
-		normalized = normalized.replaceAll(" +", " ");
-
-		return normalized.toLowerCase().trim();
+		String normalized =
+				input.replaceAll("[/,_-]", " ")         /* replace punctuation by space */
+					 .replaceAll("[^a-zA-Z0-9\\ ]", "") /* delete everything non-alphanumeric/space */
+					 .replaceAll(" +", " ")             /* replace runs of spaces with a single space */
+					 .toLowerCase().trim();
+		return normalized;
 	}
 }

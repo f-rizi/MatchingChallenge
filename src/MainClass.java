@@ -17,7 +17,7 @@ import org.json.simple.parser.ParseException;
 
 public class MainClass {
 
-	private static final String RESULTS_FILE = "../resultsTest.txt";
+	private static final String RESULTS_FILE = "../results.txt";
 	private static final String PRODUCTS_FILE = "../products.txt";
 	private static final String LISTINGS_FILE = "../listings.txt";
 
@@ -43,7 +43,7 @@ public class MainClass {
 		
 		Matcher matcher = new Matcher();
 		
-		HashMap<Product, List<Listing>> results = matcher.macheListings(
+		HashMap<Product, List<Listing>> results = matcher.matchListings(
 				products, listings);
 
 		writeResultsToFile(results);
@@ -51,7 +51,7 @@ public class MainClass {
 
 	/**
 	 * This method reads the products.txt file and for each json object in that
-	 * file generate a Product Java object and returns a ArrayList containing
+	 * file generates a Product Java object and returns a ArrayList containing
 	 * all of those Java objects.
 	 * 
 	 * @return a ArrayList of generated products
@@ -66,10 +66,7 @@ public class MainClass {
 			String line;
 			while ((line = reader.readLine()) != null) {
 				Product product = parseProductJsonString(line);
-
-				if (!products.contains(product)) {
-					products.add(product);
-				}
+				products.add(product);
 			}
 
 		} catch (FileNotFoundException e) {
