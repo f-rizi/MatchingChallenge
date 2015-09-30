@@ -9,15 +9,17 @@
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="1.8"/>
     <property name="source" value="1.8"/>
+    <path id="lib.userclasspath"/>
     <path id="JUnit 4.libraryclasspath">
         <pathelement location="../../../Applications/eclipse/plugins/org.junit_4.11.0.v201303080030/junit.jar"/>
         <pathelement location="../../../Applications/eclipse/plugins/org.hamcrest.core_1.3.0.v201303031735.jar"/>
     </path>
     <path id="Challenge2.classpath">
         <pathelement location="bin"/>
-        <pathelement location="../../../JARS/json-simple-1.1.1.jar"/>
-        <pathelement location="../../../zips/commons-lang3-3.4/commons-lang3-3.4.jar"/>
+        <path refid="lib.userclasspath"/>
         <path refid="JUnit 4.libraryclasspath"/>
+        <pathelement location="lib/json-simple-1.1.1.jar"/>
+        <pathelement location="lib/commons-lang3-3.4.jar"/>
     </path>
     <target name="init">
         <mkdir dir="bin"/>
@@ -42,20 +44,7 @@
         </javac>
     </target>
     <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
-    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
-        <copy todir="${ant.library.dir}">
-            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
-        </copy>
-        <unzip dest="${ant.library.dir}">
-            <patternset includes="jdtCompilerAdapter.jar"/>
-            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
-        </unzip>
-    </target>
-    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
-        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
-        <antcall target="build"/>
-    </target>
-    <target name="tests">
+    <target name="Challenge2">
         <mkdir dir="${junit.output.dir}"/>
         <junit fork="yes" printsummary="withOutAndErr">
             <formatter type="xml"/>
@@ -64,7 +53,7 @@
             <classpath refid="Challenge2.classpath"/>
         </junit>
     </target>
-    <target name="run">
+    <target name="MainClass">
         <java classname="MainClass" failonerror="true" fork="yes">
             <classpath refid="Challenge2.classpath"/>
         </java>

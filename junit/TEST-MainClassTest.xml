@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite errors="0" failures="0" hostname="Fatemehs-MacBook-Pro.local" name="MainClassTest" skipped="0" tests="2" time="0.05" timestamp="2015-09-29T19:43:00">
+<testsuite errors="0" failures="0" hostname="Fatemehs-MacBook-Pro.local" name="MainClassTest" skipped="0" tests="2" time="0.06" timestamp="2015-09-30T15:06:49">
   <properties>
     <property name="java.vendor" value="Oracle Corporation" />
     <property name="sun.java.launcher" value="SUN_STANDARD" />
@@ -41,7 +41,6 @@
     <property name="java.home" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home/jre" />
     <property name="env.ANDROID_HOME" value="/Users/fatemeh/Library/Android/sdk" />
     <property name="java.vm.info" value="mixed mode" />
-    <property name="env.JAVA_MAIN_CLASS_29324" value="org.apache.tools.ant.launch.Launcher" />
     <property name="env.LOGNAME" value="fatemeh" />
     <property name="ant.file.type.Challenge2" value="file" />
     <property name="ant.file" value="/Users/fatemeh/Projects/JavaProjects/Challenge2/build.xml" />
@@ -49,6 +48,7 @@
     <property name="env.TERM_PROGRAM_VERSION" value="343.7" />
     <property name="path.separator" value=":" />
     <property name="java.vm.version" value="25.31-b07" />
+    <property name="env.JAVA_MAIN_CLASS_31552" value="org.apache.tools.ant.launch.Launcher" />
     <property name="ant.file.Challenge2" value="/Users/fatemeh/Projects/JavaProjects/Challenge2/build.xml" />
     <property name="ant.library.dir" value="/usr/local/Cellar/ant/1.9.4/libexec/lib" />
     <property name="junit.output.dir" value="junit" />
@@ -67,8 +67,8 @@
     <property name="java.vm.vendor" value="Oracle Corporation" />
     <property name="gopherProxySet" value="false" />
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment" />
-    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner MainClassTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false formatter=org.apache.tools.ant.taskdefs.optional.junit.OutErrSummaryJUnitResultFormatter showoutput=false outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/Users/fatemeh/Projects/JavaProjects/Challenge2/junit/TEST-MainClassTest.xml crashfile=/Users/fatemeh/Projects/JavaProjects/Challenge2/junitvmwatcher7427419597351533397.properties propsfile=/Users/fatemeh/Projects/JavaProjects/Challenge2/junit6221848540200814428.properties" />
-    <property name="java.class.path" value="/Users/fatemeh/Projects/JavaProjects/Challenge2/bin:/Users/fatemeh/JARS/json-simple-1.1.1.jar:/Users/fatemeh/zips/commons-lang3-3.4/commons-lang3-3.4.jar:/Users/fatemeh/Applications/eclipse/plugins/org.junit_4.11.0.v201303080030/junit.jar:/Users/fatemeh/Applications/eclipse/plugins/org.hamcrest.core_1.3.0.v201303031735.jar:/usr/local/Cellar/ant/1.9.4/libexec/lib/ant-launcher.jar:/usr/local/Cellar/ant/1.9.4/libexec/lib/ant.jar:/usr/local/Cellar/ant/1.9.4/libexec/lib/ant-junit.jar:/usr/local/Cellar/ant/1.9.4/libexec/lib/ant-junit4.jar" />
+    <property name="sun.java.command" value="org.apache.tools.ant.taskdefs.optional.junit.JUnitTestRunner MainClassTest skipNonTests=false filtertrace=true haltOnError=false haltOnFailure=false formatter=org.apache.tools.ant.taskdefs.optional.junit.OutErrSummaryJUnitResultFormatter showoutput=false outputtoformatters=true logfailedtests=true threadid=0 logtestlistenerevents=false formatter=org.apache.tools.ant.taskdefs.optional.junit.XMLJUnitResultFormatter,/Users/fatemeh/Projects/JavaProjects/Challenge2/junit/TEST-MainClassTest.xml crashfile=/Users/fatemeh/Projects/JavaProjects/Challenge2/junitvmwatcher4794266372768283653.properties propsfile=/Users/fatemeh/Projects/JavaProjects/Challenge2/junit1467426113520267829.properties" />
+    <property name="java.class.path" value="/Users/fatemeh/Projects/JavaProjects/Challenge2/bin:/Users/fatemeh/Applications/eclipse/plugins/org.junit_4.11.0.v201303080030/junit.jar:/Users/fatemeh/Applications/eclipse/plugins/org.hamcrest.core_1.3.0.v201303031735.jar:/Users/fatemeh/Projects/JavaProjects/Challenge2/lib/json-simple-1.1.1.jar:/Users/fatemeh/Projects/JavaProjects/Challenge2/lib/commons-lang3-3.4.jar:/usr/local/Cellar/ant/1.9.4/libexec/lib/ant-launcher.jar:/usr/local/Cellar/ant/1.9.4/libexec/lib/ant.jar:/usr/local/Cellar/ant/1.9.4/libexec/lib/ant-junit.jar:/usr/local/Cellar/ant/1.9.4/libexec/lib/ant-junit4.jar" />
     <property name="ant.version" value="Apache Ant(TM) version 1.9.4 compiled on April 29 2014" />
     <property name="env.TERM_SESSION_ID" value="0262F54A-96F5-4B70-8A6B-C4D8A35A27F2" />
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification" />
@@ -93,10 +93,10 @@
     <property name="source" value="1.8" />
     <property name="file.encoding" value="UTF-8" />
     <property name="java.specification.version" value="1.8" />
-    <property name="ant.project.invoked-targets" value="tests" />
+    <property name="ant.project.invoked-targets" value="MainClassTest" />
   </properties>
-  <testcase classname="MainClassTest" name="testParseListingJsonString" time="0.011" />
-  <testcase classname="MainClassTest" name="testParseProductJsonString" time="0.002" />
+  <testcase classname="MainClassTest" name="testParseListingJsonString" time="0.014" />
+  <testcase classname="MainClassTest" name="testParseProductJsonString" time="0.003" />
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
