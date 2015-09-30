@@ -53,7 +53,7 @@
             <classpath refid="Challenge2.classpath"/>
         </junit>
     </target>
-    <target name="MainClass">
+    <target name="run">
         <java classname="MainClass" failonerror="true" fork="yes">
             <classpath refid="Challenge2.classpath"/>
         </java>
